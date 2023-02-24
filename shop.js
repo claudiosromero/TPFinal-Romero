@@ -116,8 +116,7 @@ function eliminarDelCarrito(productoId) {
         } else {
 Swal.fire({
     title: "¡Gracias por su Compra!",
-    text: "Agrega productos para continuar con la compra",
-    icon: "ok",
+    icon: "success",
     confirmButtonText: "Aceptar",
 })        }
     });
