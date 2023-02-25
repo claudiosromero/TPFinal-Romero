@@ -23,7 +23,7 @@ const botonVaciar = document.getElementById('vaciar-carrito');
 
 
 
-let carrito = []
+let carrito = [];
 
 
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         carrito = JSON.parse(localStorage.getItem('carrito'))
         alctualizaCarrrito()
     }
-})
+});
 
 botonVaciar.addEventListener('click', function () {
     carrito.length = 0
@@ -40,7 +40,7 @@ botonVaciar.addEventListener('click', function () {
     localStorage.clear()
     alctualizaCarrrito()
 
-})
+});
 
 
 stockProductos.forEach(function (producto) {
@@ -61,10 +61,10 @@ stockProductos.forEach(function (producto) {
 
     boton.addEventListener('click', function () {
         agregarAlCarrito(producto.id)
-    })
+    });
 
 
-})
+});
 
 function agregarAlCarrito(productoId) {
 
@@ -90,7 +90,7 @@ function agregarAlCarrito(productoId) {
 
     alctualizaCarrrito()
 
-}
+};
 
 function eliminarDelCarrito(productoId) {
     const item = carrito.find(function (prod) {
@@ -99,27 +99,11 @@ function eliminarDelCarrito(productoId) {
     const indice = carrito.indexOf(item)
     carrito.splice(indice, 1)
     alctualizaCarrrito()
-    
-}
+
+};
 
 
-// ALERTA
 
-    comprar.addEventListener("click", function () {
-        if (carrito.length === 0) {
-            Swal.fire({
-                title: "¡Carrito vacio!",
-                text: "Agrega productos para continuar con la compra",
-                icon: "error",
-                confirmButtonText: "Aceptar",
-            });
-        } else {
-Swal.fire({
-    title: "¡Gracias por su Compra!",
-    icon: "success",
-    confirmButtonText: "Aceptar",
-})        }
-    });
 
 
 function alctualizaCarrrito() {
@@ -142,8 +126,29 @@ function alctualizaCarrrito() {
 
     })
     contadorCarrito.innerText = carrito.length
-    totalCompra.innerText = carrito.reduce((accc, prod) => accc + prod.precio, 0)
+    totalCompra.innerText = carrito.reduce((accc, prod) => accc + prod.precio * prod.cantidad, 0)
 
-}
+};
 
+
+// ALERTA
+
+comprar.addEventListener("click", function () {
+    if (carrito.length === 0) {
+        Swal.fire({
+            title: "¡Carrito vacio!",
+            text: "Agrega productos para continuar con la compra",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+        });
+    } else {
+        Swal.fire({
+            title: "¡Gracias por su Compra!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+        })
+    }
+});
+
+// API
 
